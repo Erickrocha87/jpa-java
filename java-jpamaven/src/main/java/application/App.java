@@ -12,8 +12,9 @@ public class App {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
         EntityManager em = emf.createEntityManager(); // fazendo isso automaticamente vamos ter a conexão com o banco de // dados
         Pessoa p = em.find(Pessoa.class, 1);
-
-        System.out.println(p);
+        em.getTransaction().begin();
+        em.remove(p);
+        em.getTransaction().commit();
         System.out.println("Pronto!");
         em.close();
         emf.close();
